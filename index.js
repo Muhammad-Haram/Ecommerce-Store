@@ -1,11 +1,13 @@
-const express = require("express");
+import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import userRoute from "./routes/user.js";
+
+dotenv.config();
 const app = express();
-const mongoose = require("mongoose");
 
 mongoose
-  .connect(
-    "mongodb+srv://expobird:QodBZdVCvze1il0m@ecommerce.yg12r.mongodb.net/"
-  )
+  .connect(process.env.MONGO_URL)
   .then(() => {
     console.log("mongoDB connected successfully");
   })
@@ -13,6 +15,9 @@ mongoose
     console.log("mongoDB connected failed", err);
   });
 
-app.listen(5000, () => {
-  console.log("server is running on port 5000");
+app.use(express.json());
+app.use("/api/users", userRoute);
+
+app.listen(process.env.PORT || 5000, () => {
+  console.log(`server is running on port ${process.env.PORT} `);
 });
