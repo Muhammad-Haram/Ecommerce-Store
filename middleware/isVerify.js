@@ -27,3 +27,13 @@ export const verifyTokenAndAuth = (req, res, next) => {
     }
   });
 };
+
+export const verifyTokenAndAdmin = (req, res, next) => {
+  verifyToken(req, res, () => {
+    if (req.user.isAdmin) {
+      next();
+    } else {
+      res.status(401).json("you are not allowed to do that");
+    }
+  });
+};
