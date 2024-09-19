@@ -1,6 +1,7 @@
 import express from "express";
+import { verifyToken } from "./verifyToken";
 const router = express.Router();
 
-// router.route("/register").post(signUp);
+router.route("/:id").put(verifyToken, () => {});
 
 export default router;
