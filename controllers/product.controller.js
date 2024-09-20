@@ -1,18 +1,22 @@
-import { User } from "../models/user.model.js";
+import { Product } from "../models/product.model.js";
 import CryptoJS from "crypto-js";
+
+//create product
+export const createProduct = async (req, res) => {
+  const newProduct = new Product(req.body);
+  try {
+    const savedProduct = await newProduct.save();
+    res.status(200).json(savedProduct);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
 
 // update
 
-export const updateUser = async (req, res) => {
-  if (req.body.password) {
-    req.body.password = CryptoJS.AES.encrypt(
-      req.body.password,
-      process.env.PASS_SEC
-    ).toString();
-  }
-
+export const updateProduct = async (req, res) => {
   try {
-    const updateUser = await User.findByIdAndUpdate(
+    const updateProduct = await Product.findByIdAndUpdate(
       req.params.id,
       {
         $set: req.body,
@@ -20,7 +24,7 @@ export const updateUser = async (req, res) => {
       { new: true }
     );
 
-    res.status(200).json(updateUser);
+    res.status(200).json(updateProduct);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -28,10 +32,10 @@ export const updateUser = async (req, res) => {
 
 // delete
 
-export const deleteUser = async (req, res) => {
+export const deleteProduct = async (req, res) => {
   try {
-    await User.findByIdAndDelete(req.params.id);
-    res.status(200).json("User has been deleted");
+    await Product.findByIdAndDelete(req.params.id);
+    res.status(200).json("Product has been deleted");
   } catch (error) {
     res.status(500).json(error);
   }
@@ -39,52 +43,37 @@ export const deleteUser = async (req, res) => {
 
 // get user by id
 
-export const getUserById = async (req, res) => {
+export const getProductById = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
-    const { password, ...others } = user._doc;
-    res.status(200).json(others);
+    const product = await Product.findById(req.params.id);
+    res.status(200).json(product);
   } catch (err) {
     res.status(500).json(err);
   }
 };
 
-// get all user
+// get all Products
 
-export const getUser = async (req, res) => {
-  const query = req.query.new;
-  try {
-    const users = query
-      ? await User.find().sort({ _id: -1 }).limit(5)
-      : await User.find();
-    res.status(200).json(users);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-};
-
-// get user stats
-
-export const getUserStats = async (req, res) => {
-  const date = new Date();
-  const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+export const getProducts = async (req, res) => {
+  const qNew = req.query.new;
+  const qCategory = req.query.category;
 
   try {
-    const data = await User.aggregate([
-      { $match: { createdAt: { $gte: lastYear } } },
-      {
-        $project: {
-          month: { $month: "$createdAt" },
+    let products;
+
+    if (qNew) {
+      products = await Product.find().sort({ createdAt: -1 }).limit(1);
+    } else if (qCategory) {
+      products = await Product.find({
+        categories: {
+          $in: [qCategory],
         },
-      },
-      {
-        $group: {
-          _id: "$month",
-          total: { $sum: 1 },
-        },
-      },
-    ]);
-    res.status(200).json(data);
+      });
+    } else {
+      products = await Product.find();
+    }
+
+    res.status(200).json(products);
   } catch (error) {
     res.status(500).json(err);
   }
