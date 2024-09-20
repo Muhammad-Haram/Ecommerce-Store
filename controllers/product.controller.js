@@ -41,7 +41,7 @@ export const deleteProduct = async (req, res) => {
   }
 };
 
-// get user by id
+// get product by id
 
 export const getProductById = async (req, res) => {
   try {
