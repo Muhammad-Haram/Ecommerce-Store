@@ -1,21 +1,21 @@
-import { Orders } from "../models/order.model.js";
+import { Order } from "../models/order.model.js";
 
-//create cart
-export const createCart = async (req, res) => {
-  const newCart = new Cart(req.body);
+//new order
+export const newOrder = async (req, res) => {
+  const newOrders = new Order(req.body);
   try {
-    const savedCart = await newCart.save();
-    res.status(200).json(savedProduct);
+    const savedOrder = await newOrders.save();
+    res.status(200).json(savedOrder);
   } catch (error) {
     res.status(500).json(error);
   }
 };
 
-// update
+// update Order
 
-export const updateCart = async (req, res) => {
+export const updateOrder = async (req, res) => {
   try {
-    const updateCart = await Cart.findByIdAndUpdate(
+    const updateOrder = await Order.findByIdAndUpdate(
       req.params.id,
       {
         $set: req.body,
@@ -23,40 +23,70 @@ export const updateCart = async (req, res) => {
       { new: true }
     );
 
-    res.status(200).json(updateCart);
+    res.status(200).json(updateOrder);
   } catch (error) {
     res.status(500).json(error);
   }
 };
 
-// delete
+// delete Order
 
-export const deleteCart = async (req, res) => {
+export const deleteOrder = async (req, res) => {
   try {
-    await Cart.findByIdAndDelete(req.params.id);
+    await Order.findByIdAndDelete(req.params.id);
     res.status(200).json("Product has been deleted");
   } catch (error) {
     res.status(500).json(error);
   }
 };
 
-// get user cart
+// get user Order
 
-export const getCartById = async (req, res) => {
+export const getOrderById = async (req, res) => {
   try {
-    const cart = await Cart.findOne({ userId: req.params.userId });
-    res.status(200).json(cart);
+    const order = await Order.findOne({ userId: req.params.userId });
+    res.status(200).json(order);
   } catch (err) {
     res.status(500).json(err);
   }
 };
 
-// get all carts
+// get all orders
 
-export const getCarts = async (req, res) => {
+export const getOrders = async (req, res) => {
   try {
-    const carts = await Cart.find();
-    res.status(200).json(carts);
+    const orders = await Order.find();
+    res.status(200).json(orders);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+// get monthly income
+
+export const getMonthlyIncome = async (req, res) => {
+  const date = new Date();
+  const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
+  const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
+
+  try {
+    const income = await Order.aggregate([
+      { $match: { createdAt: { $gte: previousMonth } } },
+      {
+        $project: {
+          month: { $month: "$createdAt" },
+          sales: "$amount",
+        },
+      },
+
+      {
+        $group: {
+          _id: "$month",
+          total: { $sum: "$sales" },
+        },
+      },
+    ]);
+    res.status(200).json(income);
   } catch (err) {
     res.status(500).json(err);
   }
