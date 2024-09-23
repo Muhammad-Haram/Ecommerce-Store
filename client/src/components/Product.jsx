@@ -3,6 +3,7 @@ import {
   SearchOutlined,
   ShoppingCartOutlined,
 } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Info = styled.div`
@@ -68,21 +69,18 @@ const Icon = styled.div`
 
 const Product = ({ item }) => {
   return (
-    <Container>
-      <Circle />
-      <Image src={item.img} />
-      <Info>
-        <Icon>
-          <ShoppingCartOutlined />
-        </Icon>
-        <Icon>
-          <SearchOutlined />
-        </Icon>
-        <Icon>
-          <FavoriteBorderOutlined />
-        </Icon>
-      </Info>
-    </Container>
+    <Link to={`/product/${item._id}`}>
+      <Container>
+        {console.log(item)}
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <p style={{ color: "black" }}>{item._id}</p>
+          <p style={{ color: "black" }}>{item.title}</p>
+          <p style={{ color: "black" }}>{item.desc}</p>
+          <p style={{ color: "black" }}>{item.color[0]}</p>
+          <p style={{ color: "black" }}>{item.price}</p>
+        </div>
+      </Container>
+    </Link>
   );
 };
 

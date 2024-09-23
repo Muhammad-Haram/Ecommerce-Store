@@ -8,7 +8,6 @@ import Login from "./pages/Login";
 import Cart from "./pages/Cart";
 
 
-const user = false;
 const appRouter = createBrowserRouter([
   {
     path: "/",

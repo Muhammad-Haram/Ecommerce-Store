@@ -7,9 +7,17 @@ import productRoute from "./routes/product.js";
 import cartRoute from "./routes/cart.js";
 import orderRoute from "./routes/order.js";
 import stripeRoute from "./routes/stripe.js";
+import cors from "cors";
 
 dotenv.config();
 const app = express();
+
+const corsOptions = {
+  // origin: "http//localhost:5173",
+  origin: "http://localhost:3000",
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 mongoose
   .connect(process.env.MONGO_URL)

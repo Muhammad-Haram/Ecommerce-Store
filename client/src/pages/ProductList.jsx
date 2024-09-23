@@ -8,6 +8,7 @@ import { mobile } from "../responsive";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 
+
 const Container = styled.div``;
 
 const Title = styled.h1`
@@ -53,7 +54,7 @@ const ProductList = () => {
     });
   };
 
-
+  // const { loading, product } = useSelector((store) => store.product);
   return (
     <Container>
       <Navbar />
@@ -93,7 +94,7 @@ const ProductList = () => {
           </Select>
         </Filter>
       </FilterContainer>
-      <Products category={category} filters={filters} sort={sort} />
+      <Products category={category} />
       <Newsletter />
       <Footer />
     </Container>
