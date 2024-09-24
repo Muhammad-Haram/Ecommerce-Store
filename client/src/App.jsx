@@ -29,10 +29,6 @@ const appRouter = createBrowserRouter([
     path: "/product/:id",
     element: <Product />,
   },
-  {
-    path: "/cart",
-    element: <Cart />,
-  }
 ]);
 
 const App = () => {

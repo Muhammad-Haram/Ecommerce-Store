@@ -1,0 +1,158 @@
+.navbar-info {
+  width: 50%;
+  height: 100vh;
+  background-color: white;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  position: absolute;
+  top: 0;
+  z-index: 3;
+  right: 0;
+  transition: 0.3s;
+}
+.navbar-links-group ul {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.dropdown-toggle {
+  background-color: transparent;
+  color: #000;
+  border: 0;
+  font-size: 20px;
+  padding: 0;
+}
+
+.dropdown-toggle:hover {
+  color: #7bb700;
+  transition: all 0.2s;
+}
+
+.nav-link {
+  color: #000;
+  list-style-type: none;
+  font-size: 20px;
+}
+
+.nav-link a :hover {
+  color: #7bb700;
+  transition: all 0.2s;
+}
+
+.nav-link-anchor {
+  color: #000;
+  text-decoration: none;
+  color: #000;
+  font-size: 20px;
+}
+
+.nav-link-anchor:hover {
+  color: #7bb700;
+  transition: all 0.2s;
+}
+
+.nav-link a {
+  text-decoration: none;
+  color: #000;
+}
+
+.dropdown-item:nth-child(1) {
+  margin-top: 30px;
+}
+
+.dropdown-item {
+  list-style: circle;
+}
+
+.dropdown-item::marker {
+  color: #7bb700;
+}
+
+.menu-btn {
+  background-color: #000;
+  border: 0;
+  color: #7bb700;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.logo-link {
+  color: #000;
+  text-decoration: none;
+}
+
+/* product card  */
+
+.product-card {
+  width: 100%;
+  margin: 30px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  border-top: 1px solid #dedede;
+  border-bottom: 1px solid #dedede;
+}
+
+.product-card-left {
+  padding: 20px;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.product-card-right {
+  padding: 20px;
+  width: 50%;
+}
+
+.product-card-img {
+  border-radius: 20px;
+  border: 1px solid #dedede;
+  width: 422px;
+  height: 182px;
+}
+
+.product-card-title {
+  font-size: 20px;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+.product-card-title:hover {
+  color: #7bb700;
+  transition: all 0.3s;
+}
+
+.product-card-para {
+  font-size: 14px;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+.product-card-para:hover {
+  color: #7bb700;
+  transition: all 0.3s;
+}
+
+.product-card-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  background-color: #7bb700;
+  border: 0;
+  outline: 0;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.product-card-anchor {
+  text-decoration: none;
+}

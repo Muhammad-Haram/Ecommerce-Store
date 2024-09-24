@@ -11,15 +11,19 @@ const Container = styled.div``;
 const Wrapper = styled.div`
   padding: 50px;
   display: flex;
-  ${mobile({ padding: "10px", flexDirection:"column" })}
+  ${mobile({ padding: "10px", flexDirection: "column" })}
 `;
 
 const ImgContainer = styled.div`
-  flex: 1;
+flex:1;
+background-color: #EDEDED;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 30px 0px;
 `;
 
 const Image = styled.img`
-  width: 100%;
   height: 90vh;
   object-fit: cover;
   ${mobile({ height: "40vh" })}
@@ -119,22 +123,19 @@ const Product = () => {
   return (
     <Container>
       <Navbar />
-      <Announcement />
+      {/* <Announcement /> */}
       <Wrapper>
-        <ImgContainer>
-          <Image src="https://i.ibb.co/S6qMxwr/jean.jpg" />
-        </ImgContainer>
+          <ImgContainer>
+            <Image src="/img/product1.png" />
+          </ImgContainer>
         <InfoContainer>
-          <Title>Denim Jumpsuit</Title>
+          <Title>VERICOM Smart Micro Data Center</Title>
           <Desc>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-            venenatis, dolor in finibus malesuada, lectus ipsum porta nunc, at
-            iaculis arcu nisi sed mauris. Nulla fermentum vestibulum ex, eget
-            tristique tortor pretium ut. Curabitur elit justo, consequat id
-            condimentum ac, volutpat ornare.
+          The VERICOM micro data center is designed to meet the demanding requirements of edge computing. It is a highly integrated, quick to deploy, plug and play, intelligently managed, scalable, fully customizable, convenient and efficient micro data center. With perfectly integrated UPS and power supply/distribution subsystems, cooling subsystems, intelligent management and security subsystems, and an optional cabling pre-termination subsystem, the micro data center is factory tested and arrives ready for installation of IT equipment.
+          The VERICOM micro data center will make your data center infrastructure deployment, operation and maintenance easy and convenient.
           </Desc>
-          <Price>$ 20</Price>
-          <FilterContainer>
+          {/* <Price>$ 20</Price> */}
+          {/* <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>
               <FilterColor color="black" />
@@ -151,15 +152,15 @@ const Product = () => {
                 <FilterSizeOption>XL</FilterSizeOption>
               </FilterSize>
             </Filter>
-          </FilterContainer>
-          <AddContainer>
+          </FilterContainer> */}
+          {/* <AddContainer>
             <AmountContainer>
               <Remove />
               <Amount>1</Amount>
               <Add />
             </AmountContainer>
             <Button>ADD TO CART</Button>
-          </AddContainer>
+          </AddContainer> */}
         </InfoContainer>
       </Wrapper>
       <Newsletter />

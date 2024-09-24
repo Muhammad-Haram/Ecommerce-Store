@@ -14,18 +14,19 @@ const Container = styled.div`
 
 const Products = ({ category }) => {
 
-  const [SingleProduct, setSingleProduct] = useState([]);
+  const [product, setProduct] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const getProducts = async () => {
       try {
-        const res = await axios.get(`http://localhost:8000/api/products?category=${category}`, {
+        const res = await axios.get(
+          category ? `http://localhost:8000/api/products?category=${category}` : `http://localhost:8000/api/products`, {
           headers: {
             "Content-Type": "application/json",
           },
           withCredentials: true,
         });
-        setSingleProduct(res.data);
+        setProduct(res.data);
         console.log("use effect main hon")
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -33,12 +34,12 @@ const Products = ({ category }) => {
       }
     };
 
-    fetchData();
+    getProducts();
   }, [category]);
 
   return (
     <Container>
-      {SingleProduct.map((item) => (
+      {product.map((item) => (
 
         <Product item={item} />
 

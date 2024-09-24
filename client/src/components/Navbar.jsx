@@ -1,8 +1,11 @@
-import { Badge } from "@material-ui/core";
-import { Search, ShoppingCartOutlined } from "@material-ui/icons";
-import React from "react";
+import { Search } from "@material-ui/icons";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { AlignJustify } from 'lucide-react';
+import { X } from 'lucide-react';
+import '../style.css'
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   height: 60px;
@@ -32,6 +35,7 @@ const Language = styled.span`
 const SearchContainer = styled.div`
   border: 0.5px solid lightgray;
   display: flex;
+  gap: 30px;
   align-items: center;
   margin-left: 25px;
   padding: 5px;
@@ -39,6 +43,8 @@ const SearchContainer = styled.div`
 
 const Input = styled.input`
   border: none;
+  width: 100%;
+outline: none;
   ${mobile({ width: "50px" })}
 `;
 
@@ -66,31 +72,97 @@ const MenuItem = styled.div`
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
 
+
 const Navbar = () => {
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const [toggleMenu, setToggleMenu] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const closeDropdown = () => {
+    setIsOpen(false);
+  };
+
   return (
-    <Container>
-      <Wrapper>
-        <Left>
-          <Language>EN</Language>
-          <SearchContainer>
-            <Input placeholder="Search" />
-            <Search style={{ color: "gray", fontSize: 16 }} />
-          </SearchContainer>
-        </Left>
-        <Center>
-          <Logo>LAMA.</Logo>
-        </Center>
-        <Right>
-          <MenuItem>REGISTER</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
-          <MenuItem>
-            <Badge badgeContent={4} color="primary">
-              <ShoppingCartOutlined />
-            </Badge>
-          </MenuItem>
-        </Right>
-      </Wrapper>
-    </Container>
+    <>
+      <Container>
+        <Wrapper>
+          <Left>
+            <Logo><Link className="logo-link" to="/">SUPRAMAX.</Link></Logo>
+          </Left>
+          <Center>
+            <SearchContainer>
+              <Search style={{ color: "gray", fontSize: 16 }} />
+              <Input placeholder="Search" />
+            </SearchContainer>
+          </Center>
+          <Right>
+            <MenuItem><Link className="nav-link-anchor" to="/register">Register</Link></MenuItem>
+            <MenuItem><Link className="nav-link-anchor" to="/login">Login</Link></MenuItem>
+            <MenuItem><button className="menu-btn" onClick={() => setToggleMenu(true)}>
+              <AlignJustify />
+            </button></MenuItem>
+          </Right>
+        </Wrapper>
+      </Container>
+
+      {
+        toggleMenu && (
+          <div className="navbar-info">
+
+            <Container>
+              <Wrapper>
+                <Right>
+                  <MenuItem><button className="menu-btn" onClick={() => setToggleMenu(false)}>
+                    <X />
+                  </button></MenuItem>
+                </Right>
+              </Wrapper>
+            </Container>
+
+            <div className="navbar-links-group">
+              <ul>
+                <li className="nav-link"><Link className="nav-link-anchor" to="/">Home</Link></li>
+
+
+                <div className="dropdown" onMouseLeave={closeDropdown}>
+                  <button
+                    className="dropdown-toggle"
+                    onClick={toggleDropdown}
+                    onMouseEnter={toggleDropdown} // Opens on hover
+                  >
+                    Products
+                  </button>
+                  {isOpen && (
+                    <ul className="dropdown-menu">
+                      <li className="dropdown-item nav-link" onClick={closeDropdown}>
+                        <Link className="nav-link-anchor" to="/products/network-communication">Network Communication</Link>
+                      </li>
+                      <li className="dropdown-item nav-link" onClick={closeDropdown}>
+                        <Link className="nav-link-anchor" to="/data-center-infrastructure">Data Center Infrastructure</Link>
+                      </li>
+                      <li className="dropdown-item nav-link" onClick={closeDropdown}>
+                        <Link className="nav-link-anchor" to="smart-city-solutions">Smart City Solutions</Link>
+                      </li>
+                    </ul>
+                  )}
+                </div>
+
+
+
+                <li className="nav-link"><Link className="nav-link-anchor" to="/">About</Link></li>
+                <li className="nav-link"><Link className="nav-link-anchor" to="/" >Support</Link></li>
+              </ul>
+            </div>
+
+          </div>
+        )
+      }
+    </>
   );
 };
 

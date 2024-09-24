@@ -8,12 +8,14 @@ const Container = styled.div`
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
     ),
-    url("https://images.pexels.com/photos/6984661/pexels-photo-6984661.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+    url("/img/slider2.jpg")
       center;
   background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
 `;
 
 const Wrapper = styled.div`
@@ -49,7 +51,7 @@ const Button = styled.button`
   width: 40%;
   border: none;
   padding: 15px 20px;
-  background-color: teal;
+  background-color: #7bb700;
   color: white;
   cursor: pointer;
 `;
