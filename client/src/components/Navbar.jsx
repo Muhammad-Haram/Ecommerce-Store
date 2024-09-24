@@ -133,7 +133,7 @@ const Navbar = () => {
                   <button
                     className="dropdown-toggle"
                     onClick={toggleDropdown}
-                    onMouseEnter={toggleDropdown} // Opens on hover
+                    onMouseEnter={toggleDropdown}
                   >
                     Products
                   </button>
