@@ -1,4 +1,4 @@
-import { Add, Remove } from "@material-ui/icons";
+import { SquarePlus, SquareMinus } from 'lucide-react';
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
@@ -188,9 +188,9 @@ const Cart = () => {
               </ProductDetail>
               <PriceDetail>
                 <ProductAmountContainer>
-                  <Add />
+                  <SquarePlus />
                   <ProductAmount>2</ProductAmount>
-                  <Remove />
+                  <SquareMinus />
                 </ProductAmountContainer>
                 <ProductPrice>$ 30</ProductPrice>
               </PriceDetail>
@@ -214,9 +214,9 @@ const Cart = () => {
               </ProductDetail>
               <PriceDetail>
                 <ProductAmountContainer>
-                  <Add />
+                  <SquarePlus />
                   <ProductAmount>1</ProductAmount>
-                  <Remove />
+                  <SquareMinus />
                 </ProductAmountContainer>
                 <ProductPrice>$ 20</ProductPrice>
               </PriceDetail>

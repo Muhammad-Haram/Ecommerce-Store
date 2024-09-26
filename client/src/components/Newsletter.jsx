@@ -1,4 +1,4 @@
-import { Send } from "@material-ui/icons";
+import { SendHorizontal } from 'lucide-react';
 import styled from "styled-components";
 import { mobile } from "../responsive";
 
@@ -55,7 +55,7 @@ const Newsletter = () => {
       <InputContainer>
         <Input placeholder="Your email" />
         <Button>
-          <Send />
+          <SendHorizontal />
         </Button>
       </InputContainer>
     </Container>

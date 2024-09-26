@@ -1,12 +1,5 @@
-import {
-  Facebook,
-  Instagram,
-  MailOutline,
-  Phone,
-  Pinterest,
-  Room,
-  Twitter,
-} from "@material-ui/icons";
+import { Mail, Phone, Facebook, Instagram, MapPin, Twitter } from 'lucide-react';
+
 import styled from "styled-components";
 import { mobile } from "../responsive";
 
@@ -102,9 +95,6 @@ const Footer = () => {
           <SocialIcon color="55ACEE">
             <Twitter />
           </SocialIcon>
-          <SocialIcon color="E60023">
-            <Pinterest />
-          </SocialIcon>
         </SocialContainer>
       </Left>
       <Center>
@@ -121,13 +111,13 @@ const Footer = () => {
       <Right>
         <Title>Contact</Title>
         <ContactItem>
-          <Room style={{ marginRight: "10px" }} /> 622 Dixie Path , South Tobinchester 98336
+          <MapPin style={{ marginRight: "10px" }} /> 622 Dixie Path , South Tobinchester 98336
         </ContactItem>
         <ContactItem>
           <Phone style={{ marginRight: "10px" }} /> +1 234 56 78
         </ContactItem>
         <ContactItem>
-          <MailOutline style={{ marginRight: "10px" }} /> contact@lama.dev
+          <Mail style={{ marginRight: "10px" }} /> contact@lama.dev
         </ContactItem>
         <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
       </Right>

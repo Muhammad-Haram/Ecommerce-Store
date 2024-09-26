@@ -1,4 +1,4 @@
-import { Search } from "@material-ui/icons";
+import { Search } from 'lucide-react';
 import React, { useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
@@ -133,7 +133,7 @@ const Navbar = () => {
                   <button
                     className="dropdown-toggle"
                     onClick={toggleDropdown}
-                    onMouseEnter={toggleDropdown}
+                    onMouseEnter={toggleDropdown}   
                   >
                     Products
                   </button>
