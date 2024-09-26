@@ -3,7 +3,7 @@ import { popularProducts } from "../data";
 import Product from "./Product";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+
 
 const Container = styled.div`
     padding: 20px;

@@ -6,6 +6,7 @@ import { mobile } from "../responsive";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { publicRequest } from "../requestMethod";
 
 const Container = styled.div``;
 
@@ -129,7 +130,7 @@ const Product = () => {
   useEffect(() => {
     const getProductDetails = async () => {
       try {
-        const res = await axios.get(`http://localhost:8000/api/products/find/${id}`, {
+        const res = await publicRequest.get(`/products/find/${id}`, {
           headers: {
             "Content-Type": "application/json",
           },
