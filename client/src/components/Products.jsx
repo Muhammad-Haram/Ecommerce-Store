@@ -38,13 +38,13 @@ const Products = ({ category }) => {
   }, [category]);
 
   return (
-    <Container>
-      {product.map((item) => (
+    product ? <Container>
+      {product.map((item, index) => (
 
-        <Product item={item} />
+        <Product key={index} item={item} />
 
       ))}
-    </Container>
+    </Container> : (<div className="notFound"><h1>Not Found</h1></div>)
   );
 };
 

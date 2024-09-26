@@ -75,6 +75,6 @@ export const getProducts = async (req, res) => {
 
     res.status(200).json(products);
   } catch (error) {
-    res.status(500).json(err);
+    res.status(500).json(error);
   }
 };

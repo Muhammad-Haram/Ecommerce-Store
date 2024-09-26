@@ -1,9 +1,11 @@
 import styled from "styled-components";
-import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import { mobile } from "../responsive";
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Container = styled.div``;
 
@@ -23,7 +25,6 @@ padding: 30px 0px;
 `;
 
 const Image = styled.img`
-  height: 90vh;
   object-fit: cover;
   ${mobile({ height: "40vh" })}
 `;
@@ -119,20 +120,56 @@ const Button = styled.button`
 `;
 
 const Product = () => {
+
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+
+  const [product, setProduct] = useState(null);
+
+  useEffect(() => {
+    const getProductDetails = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8000/api/products/find/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        });
+        setProduct(res.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    getProductDetails();
+  }, [id]);
+
+  if (!product) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <Container>
       <Navbar />
       {/* <Announcement /> */}
       <Wrapper>
-          <ImgContainer>
-            <Image src="/img/product1.png" />
-          </ImgContainer>
+        <ImgContainer>
+          <Image src={product.img} />
+        </ImgContainer>
         <InfoContainer>
-          <Title>VERICOM Smart Micro Data Center</Title>
+          <Title>{product.title}</Title>
           <Desc>
-          The VERICOM micro data center is designed to meet the demanding requirements of edge computing. It is a highly integrated, quick to deploy, plug and play, intelligently managed, scalable, fully customizable, convenient and efficient micro data center. With perfectly integrated UPS and power supply/distribution subsystems, cooling subsystems, intelligent management and security subsystems, and an optional cabling pre-termination subsystem, the micro data center is factory tested and arrives ready for installation of IT equipment.
-          The VERICOM micro data center will make your data center infrastructure deployment, operation and maintenance easy and convenient.
+            {product.desc}
           </Desc>
+
+          <ul>
+            {product.points.map((e, index) => (
+              <li key={index}>{e}</li>
+            ))}
+          </ul>
+
+
+
           {/* <Price>$ 20</Price> */}
           {/* <FilterContainer>
             <Filter>
