@@ -1,8 +1,9 @@
-auth
+auth ✔
 responsive
-dashBoard
+dashBoard ui ✔
+dashboard dynamic
 session timeout (data save on session) ✔
-Redux
+Redux ✔
 search query
 denamic data and token
 image save on db --

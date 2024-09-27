@@ -10,7 +10,7 @@ const Container = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
 `;
-
+    
 const Products = ({ category }) => {
 
   const [product, setProduct] = useState([]);

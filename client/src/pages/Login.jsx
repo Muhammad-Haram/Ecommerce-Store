@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../redux/apiCalls";
+import { login } from "../redux/apiCalls.js";
+import { useNavigate } from "react-router-dom";
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -67,15 +68,22 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const { isFetching, error } = useSelector((store) => store.auth);
+  const navigate = useNavigate();
+
+  const { isFetching, error, currentUser } = useSelector((store) => store.auth);
 
   const loginHandler = (e) => {
     e.preventDefault();
     login(dispatch, { username, password });
-    console.log(user)
+    console.log(currentUser)
   }
 
-  const user = useSelector((store) => store.auth.currentUser);
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/");
+    }
+  }, []);
+
 
   return (
     <Container>
