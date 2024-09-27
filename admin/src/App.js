@@ -9,6 +9,7 @@ import NewUser from "./pages/newUser/NewUser";
 import ProductList from "./pages/productList/ProductList";
 import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
+import Login from "./pages/login/Login.jsx";
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
       <div className="container">
         <Sidebar />
         <Switch>
+          <Route exact path="/login">
+            <Login />
+          </Route>
           <Route exact path="/">
             <Home />
           </Route>
