@@ -52,6 +52,9 @@ export const logIn = async (req, res) => {
 
     res.status(200).json({ ...others, accessToken });
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({
+      error: error,
+      message: "Something went wrong",
+    });
   }
 };
