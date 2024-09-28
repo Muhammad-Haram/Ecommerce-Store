@@ -17,23 +17,43 @@ import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login.jsx";
 import Topbar from "./components/topbar/Topbar.jsx";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const App = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const admin = JSON.parse(
+    JSON.parse(localStorage.getItem("persist:root")).auth
+  ).currentUser?.isAdmin;
+
+  useEffect(() => {
+    if (admin) {
+      navigate("/");
+    }else{
+      navigate("/login")
+    }
+  }, []);
+
   return (
     <>
-      {location.pathname !== "/login" && <Topbar />}
+      {location.pathname !== "/login" && admin && <Topbar />}
       <div className={`${location.pathname !== "/login" ? "container" : ""}`}>
-        {location.pathname !== "/login" && <Sidebar />}
+        {location.pathname !== "/login" && admin && <Sidebar />}
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/users" element={<UserList />} />
-          <Route path="/user/:userId" element={<User />} />
-          <Route path="/newUser" element={<NewUser />} />
-          <Route path="/products" element={<ProductList />} />
-          <Route path="/product/:productId" element={<Product />} />
-          <Route path="/newproduct" element={<NewProduct />} />
+          {admin && (
+            <>
+              <Route path="/" element={<Home />} />
+              <Route path="/users" element={<UserList />} />
+              <Route path="/user/:userId" element={<User />} />
+              <Route path="/newUser" element={<NewUser />} />
+              <Route path="/products" element={<ProductList />} />
+              <Route path="/product/:productId" element={<Product />} />
+              <Route path="/newproduct" element={<NewProduct />} />
+            </>
+          )}
         </Routes>
       </div>
     </>

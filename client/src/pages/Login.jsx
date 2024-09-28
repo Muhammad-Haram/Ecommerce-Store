@@ -75,6 +75,11 @@ const Login = () => {
     e.preventDefault();
     login(dispatch, { username, password });
     console.log(currentUser)
+
+    if (currentUser) {
+      navigate("/");
+    }
+
   }
 
   useEffect(() => {
