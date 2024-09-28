@@ -44,12 +44,7 @@ export default function Home() {
     getUserStats()
   }, [MONTHS])
 
-  console.log(userStats)
-
-
   return (
-
-
     <div className="home">
       <FeaturedInfo />
       <Chart data={userStats} title="User Analytics" grid dataKey="Active User" />
