@@ -1,0 +1,42 @@
+.loginDiv {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("../../../src/img/bg.jpg") center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.wrapper {
+  width: 25%;
+  padding: 20px;
+  background-color: white;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputBox {
+  flex: 1;
+  min-width: 40%;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.loginButton {
+  width: 40%;
+  border: none;
+  padding: 15px 20px;
+  background-color: #7bb700;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 10px;
+}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from "react-redux";
 import { login } from '../../redux/apiCalls.js'
+import "./login.css";
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -12,12 +13,14 @@ const Login = () => {
     }
 
     return (
-        <div>
-            <h1>DashBoard Login</h1>
-            <div>
-                <input type="text" placeholder='username' onChange={(e) => setUsername(e.target.value)} />
-                <input type="password" placeholder='password' onChange={(e) => setPassword(e.target.value)} />
-                <button type='submit' onClick={handleClick}>Login</button>
+        <div className='loginDiv'>
+            <div className='wrapper'>
+                <h1>DashBoard Login</h1>
+                <div className='loginForm'>
+                    <input className='inputBox ' type="text" placeholder='username' onChange={(e) => setUsername(e.target.value)} />
+                    <input className='inputBox ' type="password" placeholder='password' onChange={(e) => setPassword(e.target.value)} />
+                    <button className='loginButton' type='submit' onClick={handleClick}>Login</button>
+                </div>
             </div>
         </div>
     )
