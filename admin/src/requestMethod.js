@@ -8,6 +8,7 @@ try {
     const authData = JSON.parse(rootData).auth;
     TOKEN = JSON.parse(authData)?.currentUser?.accessToken;
   }
+  console.log(TOKEN);
 } catch (error) {
   console.error("Error parsing JSON:", error);
 }
@@ -18,5 +19,5 @@ export const publicRequest = axios.create({
 
 export const userRequest = axios.create({
   baseURL: BASE_URL,
-  header: { token: `Bearer ${TOKEN}` },
+  headers: { token: `Bearer ${TOKEN}` },
 });

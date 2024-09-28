@@ -1,7 +1,17 @@
 import axios from "axios";
 const BASE_URL = "http://localhost:8000/api/";
-const TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZWMxMmJlN2M4ZjJhZDMwMTM2Y2M1MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcyNjc0Nzc0NywiZXhwIjoxNzI3MDA2OTQ3fQ.AwXx0gpePLbqr99WQSHflvuar_HFsmpe5-QE_nl_b3o";
+
+let TOKEN;
+try {
+  const rootData = localStorage.getItem("persist:root");
+  if (rootData) {
+    const authData = JSON.parse(rootData).auth;
+    TOKEN = JSON.parse(authData)?.currentUser?.accessToken;
+  }
+  console.log(TOKEN);
+} catch (error) {
+  console.error("Error parsing JSON:", error);
+}
 
 export const publicRequest = axios.create({
   baseURL: BASE_URL,
@@ -9,5 +19,5 @@ export const publicRequest = axios.create({
 
 export const userRequest = axios.create({
   baseURL: BASE_URL,
-  header: { token: `Bearer ${TOKEN}` },
+  headers: { token: `Bearer ${TOKEN}` },
 });
