@@ -22,30 +22,25 @@ export default function ProductList() {
   }, [dispatch])
 
   const columns = [
-    { field: "_id", headerName: "ID", width: 220 },
+    { field: "_id", headerName: "ID", width: 200 },
     {
       field: "product",
       headerName: "Product",
-      width: 200,
+      width: 450,
       renderCell: (params) => {
         return (
-          <div className="productListItem">z
+          <div className="productListItem">
             <img className="productListImg" src={params.row.img} alt="" />
             {params.row.title}
           </div>
         );
       },
     },
-    { field: "stock", headerName: "Stock", width: 200 },
+    { field: "inStock", headerName: "Stock", width: 100 },
     {
-      field: "status",
-      headerName: "Status",
-      width: 120,
-    },
-    {
-      field: "price",
-      headerName: "Price",
-      width: 160,
+      field: "categories",
+      headerName: "Category",
+      width: 300,
     },
     {
       field: "action",
