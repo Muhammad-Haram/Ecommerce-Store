@@ -28,13 +28,13 @@ const App = () => {
     JSON.parse(localStorage.getItem("persist:root")).auth
   ).currentUser?.isAdmin;
 
-  useEffect(() => {
-    if (admin) {
-      navigate("/");
-    }else{
-      navigate("/login")
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (admin) {
+  //     navigate("/");
+  //   }else{
+  //     navigate("/login")
+  //   }
+  // }, []);
 
   return (
     <>
