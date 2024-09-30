@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./widgetSm.css";
-import { Visibility } from "@material-ui/icons";
 import { userRequest } from "../../requestMethod";
+import Visibility from "@mui/icons-material/Visibility";
 
 export default function WidgetSm() {
 
@@ -31,11 +31,11 @@ export default function WidgetSm() {
 
           <li className="widgetSmListItem" key={user._id}>
             <div className="widgetSmUser">
-            <img
-              src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500"
-              alt=""
-              className="widgetSmImg"
-            />
+              <img
+                src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                alt=""
+                className="widgetSmImg"
+              />
               <span className="widgetSmUsername">{user.username}</span>
             </div>
             <button className="widgetSmButton">

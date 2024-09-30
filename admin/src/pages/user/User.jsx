@@ -1,13 +1,11 @@
-import {
-  CalendarToday,
-  LocationSearching,
-  MailOutline,
-  PermIdentity,
-  PhoneAndroid,
-  Publish,
-} from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import "./user.css";
+import PermIdentity from '@mui/icons-material/PermIdentity';
+import CalendarToday from '@mui/icons-material/CalendarToday';
+import PhoneAndroid from '@mui/icons-material/PhoneAndroid';
+import MailOutline from '@mui/icons-material/MailOutline';
+import LocationSearching from '@mui/icons-material/LocationSearching';
+import Publish from '@mui/icons-material/Publish';
 
 export default function User() {
   return (
