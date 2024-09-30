@@ -76,12 +76,14 @@
 
 .productForm {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  gap: 60px;
 }
 
 .productFormLeft {
   display: flex;
   flex-direction: column;
+  width: 40%;
 }
 
 .productFormLeft > label {
@@ -112,11 +114,17 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  width: 40%;
 }
 
 .productUpload{
   display: flex;
   align-items: center;
+}
+
+.productUpload img{
+  width: 100%;
+  height: 100%;
 }
 
 .productButton{
@@ -127,4 +135,26 @@
   color:white;
   font-weight: 600;
   cursor: pointer;
+}
+
+label{
+  color: black;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.productFormLeft-input{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.productFormLeft-input input,
+.productFormLeft-input textarea{
+  border-radius: 10px;
+  border: 1px solid #d6d6d6;
+  padding: 12px;
+  outline: 0;
 }
