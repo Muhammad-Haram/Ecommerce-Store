@@ -4,16 +4,18 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/
 import app from "../../firebase";
 import { addProducts } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { productData } from "../../dummyData";
+
 
 export default function NewProduct() {
-
 
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState("");
   const [category, setCategory] = useState([]);
   const [points, setPoints] = useState([]);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setInputs((prev) => {
@@ -31,7 +33,10 @@ export default function NewProduct() {
 
   const handleClick = async (e) => {
     e.preventDefault()
-    const fileName = new Date().getTime() + file.name;
+    const filetitle = inputs.title || "default"; // Agar title nahi hai to default naam rakh lo
+    const sanitizedTitle = filetitle.replace(/[^a-z0-9]/gi, "_").toLowerCase();
+    const fileName = `${sanitizedTitle}_${new Date().getTime()}.jpg`
+    console.log(fileName)
     const storage = getStorage(app);
     const storageRef = ref(storage, fileName);
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -51,16 +56,14 @@ export default function NewProduct() {
         }
       },
       (error) => {
-        // Handle unsuccessful uploads
+        console.log(error)
       },
       () => {
-        // Handle successful uploads on complete
-        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           console.log('File available at', downloadURL);
           const product = { ...inputs, img: downloadURL, categories: category, points: points };
           addProducts(product, dispatch)
-          // console.log({ ...inputs, img: downloadURL, categories: category, points: points })
+          navigate("/products")
         });
       }
     );
@@ -100,7 +103,7 @@ export default function NewProduct() {
 
         <div className="addProductItem">
           <label>Stock</label>
-          <input name="inStock" type="text" placeholder="Stock in Numbers" onChange={handleChange} />
+          <input name="inStock" type="number" placeholder="Stock in Numbers" onChange={handleChange} />
         </div>
 
         <button onClick={handleClick} className="addProductButton">Create</button>

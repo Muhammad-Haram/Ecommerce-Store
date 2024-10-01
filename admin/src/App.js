@@ -18,11 +18,10 @@ import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login.jsx";
 import Topbar from "./components/topbar/Topbar.jsx";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 const App = () => {
   const location = useLocation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const admin = JSON.parse(
     JSON.parse(localStorage.getItem("persist:root")).auth

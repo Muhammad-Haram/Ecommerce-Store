@@ -1,10 +1,20 @@
 import React from "react";
 import "./topbar.css";
-import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
-import NotificationsNone from "@mui/icons-material/NotificationsNone";
-import Translate from "@mui/icons-material/Translate";
+import LogoutTwoToneIcon from '@mui/icons-material/LogoutTwoTone';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../redux/authSlice';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function Topbar() {
+
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
+  const username = useSelector((state) => state.auth.currentUser?.username);
+
   return (
     <div className="topbar">
       <div className="topbarWrapper">
@@ -12,18 +22,18 @@ export default function Topbar() {
           <span className="logo">Supramax Admin</span>
         </div>
         <div className="topRight">
-          <div className="topbarIconContainer">
-            <NotificationsNone />
-            <span className="topIconBadge">2</span>
+
+          <div className="usernameDiv">
+            <AccountCircleIcon className="icons" />
+            <p className="usernamePara">{username}</p>
           </div>
-          <div className="topbarIconContainer">
-            <Translate />
-            <span className="topIconBadge">2</span>
+
+          <div>
+            <button className="logoutButton" onClick={handleLogout}>
+              <LogoutTwoToneIcon className="icons" />
+            </button>
           </div>
-          <div className="topbarIconContainer">
-            <SettingsApplicationsIcon />
-          </div>
-          <img src="https://images.pexels.com/photos/1526814/pexels-photo-1526814.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" className="topAvatar" />
+
         </div>
       </div>
     </div>
