@@ -40,12 +40,12 @@ export default function Sidebar() {
               </li>
             </Link>
 
-            <Link to="/newUser" className="link">
+            {/* <Link to="/newUser" className="link">
               <li className="sidebarListItem">
                 <PersonAddAltIcon className="sidebarIcon" />
                 Add Users
               </li>
-            </Link>
+            </Link> */}
 
             <Link to="/products" className="link">
               <li className="sidebarListItem">

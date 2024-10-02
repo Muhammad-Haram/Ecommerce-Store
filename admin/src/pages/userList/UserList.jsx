@@ -1,8 +1,7 @@
 import "./userList.css";
 import { DataGrid } from '@mui/x-data-grid';
-import { userRows } from "../../dummyData";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import DeleteOutline from "@mui/icons-material/DeleteOutline";
 import { deleteUsers, getUsers } from "../../redux/apiCalls";
@@ -20,8 +19,6 @@ export default function UserList() {
   useEffect(() => {
     getUsers(dispatch)
   }, [dispatch])
-
-  const [data, setData] = useState(userRows);
 
   const columns = [
     { field: "_id", headerName: "ID", width: 200 },

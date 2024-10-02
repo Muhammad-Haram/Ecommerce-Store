@@ -21,6 +21,9 @@ import {
   getUserFailure,
   getUserStart,
   getUserSuccess,
+  updateUserFailure,
+  updateUserStart,
+  updateUserSuccess,
 } from "./userSlice.js";
 
 export const login = async (dispatch, auth) => {
@@ -57,7 +60,6 @@ export const updateProducts = async (id, product, dispatch) => {
   dispatch(updateProductStart());
   try {
     const response = await userRequest.put(`/products/${id}`, product);
-    console.log(response);
     dispatch(updateProductSuccess({ id, product }));
   } catch (error) {
     console.log(error);
@@ -94,5 +96,16 @@ export const deleteUsers = async (id, dispatch) => {
     dispatch(deleteUserSuccess(id));
   } catch (error) {
     dispatch(deleteUserFailure());
+  }
+};
+
+export const updateUsers = async (id, user, dispatch) => {
+  dispatch(updateUserStart());
+  try {
+    const response = await userRequest.put(`/users/${id}`, user);
+    dispatch(updateUserSuccess({ id, user }));
+  } catch (error) {
+    console.log(error);
+    dispatch(updateUserFailure());
   }
 };
