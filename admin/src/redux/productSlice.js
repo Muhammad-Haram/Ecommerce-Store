@@ -51,16 +51,11 @@ const productSlice = createSlice({
       state.error = false;
     },
 
-    // updateProductSuccess: (state, action) => {
-    //   state.isFetching = false;
-    //   state.products[
-    //     state.products.findIndex((item) => item._id === action.payload.id)
-    //   ] = action.payload.product;
-    // },
-
     updateProductSuccess: (state, action) => {
-      const index = state.products.findIndex(item => item._id === action.payload.id);
-      state.products[index] = action.payload.product;
+      state.isFetching = false;
+      state.products[
+        state.products.findIndex((item) => item._id === action.payload.id)
+      ] = action.payload.product;
     },
 
     updateProductFailure: (state) => {

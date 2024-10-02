@@ -14,6 +14,14 @@ import {
   updateProductSuccess,
   updateProductFailure,
 } from "./productSlice.js";
+import {
+  deleteUserFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+  getUserFailure,
+  getUserStart,
+  getUserSuccess,
+} from "./userSlice.js";
 
 export const login = async (dispatch, auth) => {
   dispatch(loginStart());
@@ -64,5 +72,27 @@ export const addProducts = async (product, dispatch) => {
     dispatch(addProductSuccess(res.data));
   } catch (error) {
     dispatch(addProductFailure());
+  }
+};
+
+// get user
+
+export const getUsers = async (dispatch) => {
+  dispatch(getUserStart());
+  try {
+    const res = await userRequest.get("/users");
+    dispatch(getUserSuccess(res.data));
+  } catch (error) {
+    dispatch(getUserFailure());
+  }
+};
+
+export const deleteUsers = async (id, dispatch) => {
+  dispatch(deleteUserStart());
+  try {
+    await userRequest.delete(`/users/${id}`);
+    dispatch(deleteUserSuccess(id));
+  } catch (error) {
+    dispatch(deleteUserFailure());
   }
 };

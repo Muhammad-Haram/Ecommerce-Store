@@ -9,7 +9,7 @@ import DeleteOutline from "@mui/icons-material/DeleteOutline";
 export default function ProductList() {
   const dispatch = useDispatch()
   const products = useSelector((store) => store.product.products)
-  
+
   const handleDelete = (id) => {
     deleteProducts(id, dispatch);
     getProducts(dispatch);

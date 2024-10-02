@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import "./product.css";
 import Publish from "@mui/icons-material/Publish";
 import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import app from "../../firebase";
