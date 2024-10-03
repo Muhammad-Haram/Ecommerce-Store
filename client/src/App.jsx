@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import ProductList from "./pages/ProductList";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard"
+import NewProduct from "./pages/NewProduct";
 
 
 const appRouter = createBrowserRouter([
@@ -28,6 +30,16 @@ const appRouter = createBrowserRouter([
     path: "/product/:id",
     element: <Product />,
   },
+  {
+    path: "/dashboard",
+    element: <Dashboard/>,
+  },
+
+  {
+    path: "/dashboard/newproduct",
+    element: <NewProduct/>,
+  },
+
 ]);
 
 const App = () => {

@@ -8,7 +8,6 @@ try {
     const authData = JSON.parse(rootData).auth;
     TOKEN = JSON.parse(authData)?.currentUser?.accessToken;
   }
-  console.log(TOKEN);
 } catch (error) {
   console.error("Error parsing JSON:", error);
 }
