@@ -3,7 +3,6 @@ import CryptoJS from "crypto-js";
 import jwt from "jsonwebtoken";
 
 // signup
-
 export const signUp = async (req, res) => {
   const newUser = new User({
     username: req.body.username,
@@ -18,43 +17,60 @@ export const signUp = async (req, res) => {
     const savedUser = await newUser.save();
     res.status(201).json(savedUser);
   } catch (error) {
-    res.status(500).json(error);
+    console.error('Signup error:', error);
+    res.status(500).json({
+      message: 'Internal Server Error during signup',
+      error: error.message
+    });
   }
 };
 
 // login
-
 export const logIn = async (req, res) => {
   try {
+    // Find user by username
     let user = await User.findOne({ username: req.body.username });
-    !user && res.status(401).json("Wrong user name");
+    
+    // If user is not found, return with an error
+    if (!user) {
+      return res.status(401).json("Wrong username");
+    }
 
+    // Decrypt the stored password
     const hashedPassword = CryptoJS.AES.decrypt(
       user.password,
       process.env.PASS_SEC
     );
 
-    const orignalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
+    const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
 
-    orignalPassword !== req.body.password &&
-      res.status(401).json("Wrong password");
+    // If password does not match, return with an error
+    if (originalPassword !== req.body.password) {
+      return res.status(401).json("Wrong password");
+    }
 
+    // Token data
     const tokenData = {
       id: user._id,
       isAdmin: user.isAdmin,
     };
 
+    // Generate JWT token
     const accessToken = jwt.sign(tokenData, process.env.JWT_SEC, {
       expiresIn: "3d",
     });
 
+    // Remove password from the response
     const { password, ...others } = user._doc;
 
+    // Send success response
     res.status(200).json({ ...others, accessToken });
   } catch (error) {
+    // Log the error and return a 500 response
+    console.error('Login error:', error);
     res.status(500).json({
-      error: error,
-      message: "Something went wrong",
+      message: "Something went wrong during login",
+      error: error.message
     });
   }
 };

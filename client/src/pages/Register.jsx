@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { register } from "../redux/apiCalls";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
@@ -38,7 +42,7 @@ const Form = styled.form`
 const Input = styled.input`
   flex: 1;
   min-width: 40%;
-  margin: 20px 10px 0px 0px;
+  margin:5px;
   padding: 10px;
 `;
 
@@ -48,31 +52,55 @@ const Agreement = styled.span`
 `;
 
 const Button = styled.button`
-  width: 40%;
+  width: 100%;
   border: none;
   padding: 15px 20px;
   background-color: #7bb700;
   color: white;
   cursor: pointer;
+  margin:5px;
+  margin-top: 15px;
 `;
 
 const Register = () => {
+
+  const [inputs, setInputs] = useState({});
+
+  const handleChange = (e) => {
+    setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  }
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    try {
+      register(dispatch, inputs);
+
+      const persistedRoot = JSON.parse(localStorage.getItem("persist:root"));
+      const user = persistedRoot && JSON.parse(persistedRoot.currentUser);
+      console.log(user)
+
+      if (user) {
+        navigate("/login");
+      }
+    } catch (error) { 
+      console.log(error, "register error");
+    }
+  }
+
   return (
     <Container>
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
         <Form>
-          <Input placeholder="name" />
-          <Input placeholder="last name" />
-          <Input placeholder="username" />
-          <Input placeholder="email" />
-          <Input placeholder="password" />
-          <Input placeholder="confirm password" />
-          <Agreement>
-            By creating an account, I consent to the processing of my personal
-            data in accordance with the <b>PRIVACY POLICY</b>
-          </Agreement>
-          <Button>CREATE</Button>
+          <Input name="username" type="text" placeholder="username" onChange={handleChange} />
+          <Input name="email" type="email" placeholder="email" onChange={handleChange} />
+          <Input name="password" type="password" placeholder="password" onChange={handleChange} />
+          <Button onClick={handleClick}>CREATE</Button>
         </Form>
       </Wrapper>
     </Container>

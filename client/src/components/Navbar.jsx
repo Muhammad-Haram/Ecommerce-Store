@@ -2,10 +2,12 @@ import { Search } from 'lucide-react';
 import React, { useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import { AlignJustify } from 'lucide-react';
+import { AlignJustify, LogOut } from 'lucide-react';
 import { X } from 'lucide-react';
 import '../style.css'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../redux/authSlice.js"
+import { useDispatch, useSelector } from 'react-redux';
 
 const Container = styled.div`
   height: 60px;
@@ -75,6 +77,18 @@ const MenuItem = styled.div`
 
 const Navbar = () => {
 
+  const user = useSelector((state) => state.auth.currentUser);
+  console.log(user)
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/register");
+  };
+
   const [isOpen, setIsOpen] = useState(false);
 
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -103,6 +117,10 @@ const Navbar = () => {
           <Right>
             <MenuItem><Link className="nav-link-anchor" to="/register">Register</Link></MenuItem>
             <MenuItem><Link className="nav-link-anchor" to="/login">Login</Link></MenuItem>
+            {/* <MenuItem><Link className="nav-link-anchor" to="/login">Logout</Link></MenuItem> */}
+
+            {user && (<MenuItem><button className="logoutButton" onClick={handleLogout}>Logout</button></MenuItem>)}
+
             <MenuItem><button className="menu-btn" onClick={() => setToggleMenu(true)}>
               <AlignJustify />
             </button></MenuItem>
@@ -133,7 +151,7 @@ const Navbar = () => {
                   <button
                     className="dropdown-toggle"
                     onClick={toggleDropdown}
-                    onMouseEnter={toggleDropdown}   
+                    onMouseEnter={toggleDropdown}
                   >
                     Products
                   </button>

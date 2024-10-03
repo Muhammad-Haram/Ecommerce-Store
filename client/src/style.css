@@ -164,3 +164,18 @@
   border-bottom: 1px solid #dedede;
   padding: 40px 0;
 }
+
+.logoutButton {
+  background-color: transparent;
+  border: 0;
+  color: #000;
+  text-decoration: none;
+  color: #000;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.logoutButton:hover {
+  color: #7bb700;
+  transition: all 0.2s;
+}

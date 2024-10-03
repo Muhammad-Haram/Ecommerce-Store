@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/apiCalls.js";
 import { useNavigate } from "react-router-dom";
+
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -11,20 +12,19 @@ const Container = styled.div`
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
     ),
-    url("/img/slider.jpg")
-      center;
+    url("/img/slider.jpg") center;
   background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 `;
 
 const Wrapper = styled.div`
   width: 25%;
   padding: 20px;
   background-color: white;
-  ${mobile({ width: "75%" })}
+  ${mobile({ width: "75%" })};
 `;
 
 const Title = styled.h1`
@@ -63,7 +63,6 @@ const Button = styled.button`
 `;
 
 const Login = () => {
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
@@ -74,30 +73,32 @@ const Login = () => {
   const loginHandler = (e) => {
     e.preventDefault();
     login(dispatch, { username, password });
-    console.log(currentUser)
-
-    if (currentUser) {
-      navigate("/");
-    }
-
-  }
+  };
 
   useEffect(() => {
     if (currentUser) {
-      navigate("/");
+      navigate("/");  // Redirect to home page when login is successful
     }
-  }, []);
-
+  }, [currentUser, navigate]); // Observe currentUser and navigate
 
   return (
     <Container>
       <Wrapper>
         <Title>SIGN IN</Title>
         <Form>
-          <Input placeholder="username" type="text" onChange={(e) => { setUsername(e.target.value) }} />
-          <Input placeholder="password" type="password" onChange={(e) => { setPassword(e.target.value) }} />
-
-          <Button onClick={loginHandler} disabled={isFetching}>LOGIN</Button>
+          <Input
+            placeholder="username"
+            type="text"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <Input
+            placeholder="password"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button onClick={loginHandler} disabled={isFetching}>
+            LOGIN
+          </Button>
           {error && <Error>Something went wrong...</Error>}
         </Form>
       </Wrapper>
