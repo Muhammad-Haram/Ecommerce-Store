@@ -26,6 +26,7 @@ const App = () => {
     JSON.parse(localStorage.getItem("persist:root")).auth
   ).currentUser?.isAdmin;
 
+
   return (
     <>
       {location.pathname !== "/login" && admin && <Topbar />}

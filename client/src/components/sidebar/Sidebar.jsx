@@ -33,7 +33,7 @@ export default function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Quick Menu</h3>
           <ul className="sidebarList">
-            <Link to="/users" className="link">
+            <Link to="/dashboard/users" className="link">
               <li className="sidebarListItem">
                 <PermIdentity className="sidebarIcon" />
                 Users
@@ -47,7 +47,7 @@ export default function Sidebar() {
               </li>
             </Link> */}
 
-            <Link to="/products" className="link">
+            <Link to="/dashboard/products" className="link">
               <li className="sidebarListItem">
                 <StoreIcon className="sidebarIcon" />
                 Products

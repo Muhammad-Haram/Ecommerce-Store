@@ -7,6 +7,10 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard"
 import NewProduct from "./pages/NewProduct";
+import ProductDashboardList from "./pages/ProductDashboardList";
+import UpdateProduct from "./pages/UpdateProduct";
+import UserDashboardList from "./pages/UserDashboardList";
+import UpdateUser from "./pages/UpdateUser";
 
 
 const appRouter = createBrowserRouter([
@@ -32,12 +36,32 @@ const appRouter = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard/>,
+    element: <Dashboard />,
   },
 
   {
     path: "/dashboard/newproduct",
-    element: <NewProduct/>,
+    element: <NewProduct />,
+  },
+
+  {
+    path: "/dashboard/products",
+    element: <ProductDashboardList />,
+  },
+
+  {
+    path: "/dashboard/product/:productId",
+    element: <UpdateProduct />,
+  },
+
+  {
+    path: "/dashboard/users",
+    element: <UserDashboardList />,
+  },
+
+  {
+    path: "/dashboard/user/:userId",
+    element: <UpdateUser />,
   },
 
 ]);

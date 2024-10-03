@@ -63,7 +63,7 @@ export default function NewProduct() {
           console.log('File available at', downloadURL);
           const product = { ...inputs, img: downloadURL, categories: category, points: points };
           addProducts(product, dispatch)
-          navigate("/products")
+          navigate("/dashboard/products")
         });
       }
     );
