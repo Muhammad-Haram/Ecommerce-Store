@@ -6,6 +6,8 @@ import { useEffect, useMemo, useState } from "react";
 import { userRequest } from "../requestMethod";
 import Sidebar from "../components/sidebar/Sidebar";
 import Topbar from "../components/topbar/Topbar";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Home() {
   const [userStats, setUserStats] = useState([]);
@@ -26,6 +28,21 @@ export default function Home() {
     ],
     []
   );
+  const navigate = useNavigate();
+
+  const admin = JSON.parse(
+    JSON.parse(localStorage.getItem("persist:root")).auth
+  ).currentUser?.isAdmin;
+
+  console.log(admin)
+
+  useEffect(() => {
+    if (admin) {
+      navigate("/dashboard");
+    } else {
+      navigate("/");
+    }
+  }, [admin])
 
   useEffect(() => {
     const getUserStats = async () => {
@@ -46,20 +63,20 @@ export default function Home() {
 
   return (
     <>
-    <Topbar/>
-    <div className="container">
+      <Topbar />
+      <div className="container">
 
-      <Sidebar />
+        <Sidebar />
 
-      <div className="home">
-        <FeaturedInfo />
-        <Chart data={userStats} title="User Analytics" grid dataKey="Active User" />
-        <div className="homeWidgets">
-          <WidgetSm />
-          <WidgetLg />
+        <div className="home">
+          <FeaturedInfo />
+          <Chart data={userStats} title="User Analytics" grid dataKey="Active User" />
+          <div className="homeWidgets">
+            <WidgetSm />
+            <WidgetLg />
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 }
